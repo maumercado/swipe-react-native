@@ -16,12 +16,23 @@ class Deck extends Component {
         this.panResponder = panResponder;
     }
 
+    getCardStyle() {
+        const { position } = this;
+        const rotate = position.x.interpolate({
+            inputRange: [-500, 0, 500],
+            outputRange: ["-120deg", "0deg", "120deg"]
+        });
+
+        return { ...position.getLayout(), transform: [{ rotate }] };
+    }
+
     renderCards() {
         return this.props.data.map((item, index) => {
             if (index === 0) {
                 return (
                     <Animated.View
-                        style={this.position.getLayout()}
+                        key={item.id}
+                        style={this.getCardStyle()}
                         {...this.panResponder.panHandlers}
                     >
                         {this.props.renderCard(item)}
