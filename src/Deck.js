@@ -8,7 +8,9 @@ const SWIPE_OUT_DURATION = 250;
 class Deck extends Component {
     constructor(props) {
         super(props);
+
         this.position = new Animated.ValueXY();
+
         const panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onPanResponderMove: (event, gesture) => {
@@ -28,12 +30,20 @@ class Deck extends Component {
         this.panResponder = panResponder;
     }
 
+    onSwipeComplete(direction) {
+        const { onSwipeLeft, onSwipeRight } = this.props;
+        direction === "right" ? onSwipeRight() : onSwipeLeft();
+    }
+
     forceSwipe(direction) {
         const x = direction === "right" ? SCREEN_WIDTH : -SCREEN_WIDTH;
         Animated.timing(this.position, {
             toValue: { x: x * 2, y: 0 },
             duration: SWIPE_OUT_DURATION
-        }).start();
+        }).start(() => {
+            // executes when swipe completes
+            this.onSwipeComplete(direction);
+        });
     }
 
     resetPosition() {
