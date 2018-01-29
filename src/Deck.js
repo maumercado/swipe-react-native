@@ -36,6 +36,12 @@ class Deck extends Component {
         this.state = { index: 0 };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data !== this.props.data) {
+            this.setState({ index: 0 });
+        }
+    }
+
     componentWillUpdate() {
         // Android Compatibility
         UIManager.setLayoutAnimationEnabledExperimental &&
