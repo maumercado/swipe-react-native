@@ -7,7 +7,7 @@
         "eslint": "^4.16.0",
         "eslint-plugin-react": "^7.6.0",
         "jest-expo": "23.0.0",
-        "prettier-eslint": "^8.8.1",
+        "prettier-eslint": "^9.0.1",
         "react-native-scripts": "1.11.0",
         "react-test-renderer": "16.0.0"
     },
