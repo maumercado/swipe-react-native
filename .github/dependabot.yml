@@ -1,0 +1,31 @@
+version: 2
+registries:
+  npm-registry-registry-npmjs-org:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    username: "${{secrets.NPM_REGISTRY_REGISTRY_NPMJS_ORG_USERNAME}}"
+    password: "${{secrets.NPM_REGISTRY_REGISTRY_NPMJS_ORG_PASSWORD}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: expo
+    versions:
+    - 40.0.1
+    - 41.0.0
+  - dependency-name: jest-expo
+    versions:
+    - 37.0.0
+    - 40.0.2
+  - dependency-name: eslint-plugin-react
+    versions:
+    - 7.22.0
+    - 7.23.0
+    - 7.23.1
+  registries:
+  - npm-registry-registry-npmjs-org
